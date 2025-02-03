@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"log/slog"
 	"net/http"
@@ -13,6 +12,7 @@ import (
 
 	"github.com/joho/godotenv"
 	"github.com/singhh-aakashh/student-api/internal/config"
+	"github.com/singhh-aakashh/student-api/internal/http/handlers/student"
 )
 
 func main() {
@@ -23,10 +23,7 @@ func main() {
 
 	router := http.NewServeMux()
 
-	router.HandleFunc("GET /",func(w http.ResponseWriter, r *http.Request) { 
-		w.Write([]byte("hello from server"))
-	})
-	fmt.Println("Hello world")
+	router.HandleFunc("POST /api/students/create",student.New())
 
 	server := http.Server{
 		Addr: cfg.Addr,
